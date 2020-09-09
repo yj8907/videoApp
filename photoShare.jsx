@@ -39,10 +39,10 @@ class PhotoShare extends React.Component {
             <Route exact path="/login-register"
               render={ props => <LoginRegister {...props} />}
             />
-            <Route path="/login-register/register"
+            <Route exact path="/login-register/register"
               render={ props => <Register {...props} />}
             />
-            <Route path="/" exact
+            <Route path="/"
               render={ props => <UserLogin {...props} /> }
             />
           </Switch>

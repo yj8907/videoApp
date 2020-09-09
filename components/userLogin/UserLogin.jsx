@@ -17,15 +17,19 @@ import UserDetail from '../userDetail/UserDetail';
 import UserList from '../userList/UserList';
 import UserPhotos from '../userPhotos/UserPhotos';
 import LoginRegister from '../loginRegister/LoginRegister';
+import VideoList from '../videoList/VideoList';
+
+import { Map, GoogleApiWrapper } from 'google-maps-react';
+import VideoMap from '../videoMap/VideoMap';
 
 function UserLogin(props) {
 
   const [currDisplay, setCurrDisplay] = useState("Introduction");
-  const userIsLoggedIn = useSelector(state => state.user.userIsLoggedIn);
+  // const userIsLoggedIn = useSelector(state => state.user.userIsLoggedIn);
   const viewerUserId = useSelector(state => state.user.userid);
   const viewerUserName = useSelector(state => state.user.username)
   console.log(viewerUserId);
-  // userIsLoggedIn = false;
+  const userIsLoggedIn = true;
 
   function renderLoggedIn (){
   }
@@ -43,19 +47,11 @@ function UserLogin(props) {
             <UserList />
           </Paper>
         </Grid>
-        <Grid item sm={9}>
+        <Grid item sm={9} style={{position: 'relative'}}>
           <Paper className="cs142-main-grid-item">
-            <Switch>                      
+            <Switch>
             { userIsLoggedIn ? <Route exact path="/"
-                render={() =>
-                  <Typography variant="body1">
-                  Welcome to your photosharing app! This <a href="https://material-ui.com/demos/paper/">Paper</a> component
-                  displays the main content of the application. The {"sm={9}"} prop in
-                  the <a href="https://material-ui.com/layout/grid/">Grid</a> item component makes it responsively
-                  display 9/12 of the window. The Switch component enables us to conditionally render different
-                  components to this part of the screen. You don&apos;t need to display anything here on the homepage,
-                  so you should delete this Route component once you get started.
-                  </Typography>}
+                render= { props => <VideoMap {...props}  /> }
               /> : <Redirect exact path="/" to="/login-register"/>
               }
               {userIsLoggedIn ? <Route path="/users/:userId"
@@ -67,6 +63,8 @@ function UserLogin(props) {
                 />
                 : <Redirect exact path="/" to="/login-register"/>
               }
+              <Route path="/videos/:topicId"
+                render ={ props => <VideoList {...props}  /> } />
               <Route path="/users" component={UserList}  />
             </Switch>
           </Paper>
