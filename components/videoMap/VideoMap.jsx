@@ -60,5 +60,5 @@ class VideoMap extends React.Component{
 //AIzaSyAy5DABaWxdZ0nVksLUwiaUcTutTemb-3I
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAy5DABaWxdZ0nVksLUwiaUcTutTemb-3I"
+  apiKey: ""
 })(VideoMap);
